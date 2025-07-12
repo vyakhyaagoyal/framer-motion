@@ -2,7 +2,7 @@ const content=[
     {
         title:'vyakhya goyal',
         description:'hi',
-        color:'amber'
+        color:'lightgreen'
     },
     {
         title:'alia bhatt',
