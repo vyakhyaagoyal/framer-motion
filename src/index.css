@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding:0;
+  display: flex;
+  margin-left: 10px;
+  background-color: bisque;
+}
+
+.box{
+  height:200px;
+  width:200px;
+  background-color: aqua;
+  border: 2px solid blue;
+}
+
+#paragraph{
+  font-size: 30px;
+  position: sticky;
+  top:0;
+  background-color: red;
+  padding: 10px;
+  color:white;
+}
+
+.line{
+  width:100%;
+  background-color:red;
+  height: 5px;
+  position: fixed;
+  top:0;
+  transform-origin: left;
+  left:0;
+}
