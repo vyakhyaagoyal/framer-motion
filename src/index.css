@@ -34,3 +34,18 @@ body {
   transform-origin: left;
   left:0;
 }
+
+.mask{
+  position: absolute;
+  mask-image: url(../public/mask.svg);
+  background: red;
+  mask-repeat: no-repeat;
+  mask-size: 50px;
+  color:black;
+}
+
+/* .mask:hover{
+  mask-size: 350px;
+  color:black;
+  mask-position: 50%;
+} */

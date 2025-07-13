@@ -1,4 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
+'use client';
+import MousePosition from './MousePosition';
 import './App.css'
 import { motion, useScroll } from "motion/react"
 import content from './components/content';
@@ -7,6 +9,12 @@ import Card from './components/card';
 function App() {
   // console.log(useScroll())
   // const {scrollYProgress}=useScroll();
+  const [hovered,setHovered]=useState(false);
+  const [slow, setSlow] = useState(false);
+
+  const{x,y}=MousePosition();
+  const size=hovered?350:50;
+
   return (
     <>
       {/* <header className='header bg-gray-200 text-black flex-col italic'>welcome</header> */}
@@ -45,14 +53,23 @@ function App() {
         // }}
         >
 </motion.div> */}
-      <div className='mask-container h-100vh bg-black text-stone-400 m-0 font-serif relative'>
-        <div className="mask h-screen flex justify-center items-center text-8xl cursor-default absolute top-0 left-0 w-full h-full z-10">
-          <p>THE EVIL TWIN.</p>
-        </div>
-        <div className="body h-screen flex justify-center items-center text-8xl cursor-default z-0">
+      <motion.div className='mask-container h-100vh bg-black text-stone-400 m-0 font-serif relative'>
+        <motion.div className="mask h-screen flex justify-center items-center text-8xl cursor-default absolute top-0 left-0 w-full h-full z-10"
+        animate={{
+          maskPosition:`${x-size/2}px ${y-size/2}px`,
+          maskSize:`${size}px`
+        }}
+        transition={{
+          type:'tween',
+          ease:'backOut',
+          duration:slow?1.5:0.5,
+        }}>
+          <p onMouseEnter={() => {setHovered(true); setSlow(true);}} onMouseLeave={() => {setHovered(false); setSlow(false);}}>THE EVIL TWIN.</p>
+        </motion.div>
+        <motion.div className="body h-screen flex justify-center items-center text-8xl cursor-default z-0">
           <p>THIS IS <span className='text-rose-600'>VYAKHYA</span>.</p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {content.map((content, index) => {
         return (
           <Card key={index} {...content} />
