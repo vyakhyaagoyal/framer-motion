@@ -20,7 +20,7 @@ const content=[
         color:'brown'
     },
     {
-        title:'pv sindhu',
+        title:'aariya',
         description:'hi',
         color:'lightblue'
     }

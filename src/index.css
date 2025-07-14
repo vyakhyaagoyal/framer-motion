@@ -6,7 +6,8 @@ body {
   margin: 0;
   padding:0;
   display: flex;
-  background-color: bisque;
+  background-color: black;
+  overflow-x: hidden;
 }
 
 .box{
@@ -41,6 +42,7 @@ body {
   background: red;
   mask-repeat: no-repeat;
   mask-size: 50px;
+  background:linear-gradient(red 35%,crimson 45%);
   color:black;
 }
 

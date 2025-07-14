@@ -2,13 +2,17 @@ import React,{useState} from 'react';
 'use client';
 import MousePosition from './MousePosition';
 import './App.css'
-import { motion, useScroll } from "motion/react"
+import { motion, useScroll,useTransform } from "motion/react"
 import content from './components/content';
 import Card from './components/card';
 
 function App() {
   // console.log(useScroll())
+  const {scrollY}=useScroll();
   // const {scrollYProgress}=useScroll();
+  const opacity=useTransform(scrollY, [0, 300], [1, 0]);
+  // console.log(opacity);
+
   const [hovered,setHovered]=useState(false);
   const [slow, setSlow] = useState(false);
 
@@ -17,6 +21,17 @@ function App() {
 
   return (
     <>
+    <motion.div className="div">
+      <motion.h1 className='text-9xl mb-175 ml-20 mt-25 items-center'
+      style={{
+          opacity,
+          color: "white",
+      }}>Wix studio
+      <br />
+        Deliver brilliance.
+        <br />
+        Smash deadlines.</motion.h1>
+    </motion.div>
       {/* <header className='header bg-gray-200 text-black flex-col italic'>welcome</header> */}
       {/* <h1 className='text-blue-500 bg-red-300 font-bold underline flex flex-col'>framer motion</h1>
       <motion.div 
@@ -70,6 +85,7 @@ function App() {
           <p>THIS IS <span className='text-rose-600'>VYAKHYA</span>.</p>
         </motion.div>
       </motion.div>
+      
       {content.map((content, index) => {
         return (
           <Card key={index} {...content} />
