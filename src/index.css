@@ -6,8 +6,7 @@ body {
   margin: 0;
   padding:0;
   display: flex;
-  background-color: black;
-  overflow-x: hidden;
+  overflow: auto;
 }
 
 .box{
@@ -51,3 +50,26 @@ body {
   color:black;
   mask-position: 50%;
 } */
+
+.main{
+  position: relative;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  width: fit-content;
+  
+  overflow: hidden;
+  color: #444;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white;
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0); /* initial state */
+  mask-image: linear-gradient(to right, white 100%, transparent 100%);
+}
