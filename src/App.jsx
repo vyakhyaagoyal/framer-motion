@@ -8,8 +8,11 @@ import Card from './components/card';
 import Spline from '@splinetool/react-spline';
 
 function App() {
-  const ref = useRef();
-  const { scrollYProgress } = useScroll();
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end start"], // start when top hits top, end when bottom hits top
+  });
   const clipPath = useTransform(scrollYProgress, [0, 1], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
 
   const { scrollY } = useScroll();
@@ -21,8 +24,6 @@ function App() {
   const { x, y } = MousePosition();
   const size = hovered ? 350 : 50;
 
-  // State to control scroll lock
-  // const [animationDone, setAnimationDone] = useState(false);
   // const [wixTextDone, setWixTextDone] = useState(false);
 
   // // Lock scroll until animation is done
@@ -36,51 +37,55 @@ function App() {
   //     document.body.style.overflow = 'auto';
   //   };
   // }, [wixTextDone]);
-useEffect(() => {
-    // Lock scroll
-    document.body.style.overflow = 'hidden';
 
-    // Unlock scroll after 5 seconds
-    const timer = setTimeout(() => {
-      document.body.style.overflow = 'auto';
-    }, 6000);
+  // useEffect(() => {
+  //     // Lock scroll
+  //     document.body.style.overflow = 'hidden';
 
-    // Cleanup
-    return () => clearTimeout(timer);
-  }, []);
+  //     // Unlock scroll after 5 seconds
+  //     const timer = setTimeout(() => {
+  //       document.body.style.overflow = 'auto';
+  //     }, 6000);
+
+  //     // Cleanup
+  //     return () => clearTimeout(timer);
+  //   }, []);
 
   return (
     <>
+    <section
+      ref={targetRef}
+      style={{ height: "200vh", position: "relative" }} // tall section for scroll
+    >
+<motion.div
+        style={{
+          position: "sticky",
+          top: 0,
+          height: "100vh",
+          background: "black",
+          zIndex: 10,
+        }}
+      >
       <div className="flex items-center justify-start min-h-screen" style={{ backgroundColor: 'black' }}>
-        <div className="text-8xl mb-100 ml-20 mt-25 items-center">
+        <div className="text-8xl mb-100 ml-20 mt-25 items-center" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'black' }}>
 
-          {/* <motion.h1
-
-            style={{ clipPath, color: 'white' }}
-            onAnimationComplete={() => setWixTextDone(true)}
-          >
-            Wix studio<br />
-
-          </motion.h1> */}
-
-          {/* <div style={{ width: "fit-content" }} className='text-8xl'>
+          <div style={{position: "relative", width: "fit-content", margin: "auto" }} className='text-8xl'>
             <h1 className="main">
               Hello hi
             </h1>
-            <motion.h1
-              className="text-overlay"
-              style={{ clipPath }}
-            >
-              Hello hi
-            </motion.h1>
-          </div> */}
 
-          {/* <motion.h1
+            <motion.h1 className='text-overlay' style={{ clipPath, color: 'white' }}>
+            Hello hi
+          </motion.h1>
+            
+          </div>
+
+          <motion.h1
             style={{
               opacity,
               color: "white",
             }} className='mb-100'
-            
+
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
@@ -89,11 +94,13 @@ useEffect(() => {
             Wix studio<br />
             Deliver brilliance.<br />
             Smash deadlines.
-          </motion.h1> */}
-
+          </motion.h1>
+          
         </div>
-        
+
       </div>
+      </motion.div>
+      </section>
 
       {/* <header className='header bg-gray-200 text-black flex-col italic'>welcome</header> */}
       {/* <h1 className='text-blue-500 bg-red-300 font-bold underline flex flex-col'>framer motion</h1>
